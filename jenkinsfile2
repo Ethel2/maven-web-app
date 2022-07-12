@@ -5,5 +5,36 @@ maven "maven3.8.4
 }
 stages {
 stage ("1.git clone"){
-sh "cloning application from git"
-git clone "
+steps{
+sh "echo cloning application from git"
+git clone "https://github.com/Ethel2/maven-web-app.git"
+}
+}
+stage ("2.building application") {
+steps {
+sh "echo building application"
+sh "mvn package"
+}
+}
+stage ("3.testing artifact"){
+steps {
+sh "echo testing artifact in nexus"
+sh "mvn sonar:sonar"
+}
+}
+stage ("4.seeking approval"){
+steps {
+sh "echo waiting for approval stage"
+timeout (time:5, unit:'MINUTES'){
+input message: 'awaiting approval for prod'
+}
+}
+}
+stage ("5.deploying to prod"){
+steps {
+sh "echo deploying to tomcat"
+}
+}
+}
+}
+
