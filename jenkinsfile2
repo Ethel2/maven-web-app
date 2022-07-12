@@ -1,0 +1,9 @@
+pipeline{
+agent any
+tools {
+maven "maven3.8.4
+}
+stages {
+stage ("1.git clone"){
+sh "cloning application from git"
+git clone "
