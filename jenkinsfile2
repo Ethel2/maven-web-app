@@ -7,7 +7,7 @@ stages {
 stage ("1.git clone"){
 steps{
 sh "echo cloning application from git"
-git clone "https://github.com/Ethel2/maven-web-app.git"
+git "https://github.com/Ethel2/maven-web-app.git"
 }
 }
 stage ("2.building application") {
